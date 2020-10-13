@@ -35,8 +35,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':core')
-    compile project(':extra_app')
+    compile project(':extra')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'

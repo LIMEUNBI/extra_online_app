@@ -14,17 +14,15 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.epopcon.core.eums.exception.PException;
-import com.epopcon.core.utils.Utils;
 import com.epopcon.extra.ExtraLibHelper;
-import com.epopcon.extra.card.CardConstant;
+import com.epopcon.extra.common.exception.PException;
+import com.epopcon.extra.common.utils.Utils;
 import com.epopcon.extra.online.OnlineConstant;
 import com.epopcon.extra.online.OnlineDeliveryInquiry;
 import com.epopcon.extra.online.OnlineDeliveryInquiryHandler;
 import com.epopcon.extra.online.impl.OnlineDeliveryInquiryImpl;
+import com.epopcon.extra.online.model.CartDetail;
 import com.epopcon.extra.online.model.OrderDetail;
-import com.epopcon.extra.online.model.ProductDetail;
-import com.epopcon.extra.online.model.TrackingShipment;
 import com.epopcon.test.logger.Log;
 import com.epopcon.test.logger.LogFragment;
 import com.epopcon.test.logger.LogView;
@@ -129,7 +127,6 @@ public class OnlineActivity extends AppCompatActivity {
 
         try {
             ExtraLibHelper.setWebViewUserAgentString(this);
-            com.epopcon.extra.common.LogWrapper.setConsoleOutput(true);
 
             SharedPreferences prefs = getSharedPreferences("KEEPALIVE_INFO", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
@@ -177,58 +174,15 @@ public class OnlineActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onQueryTrackingShipment(boolean success, TrackingShipment trackingShipment, PException exception) {
-                    Log.d(TAG, "onQueryTrackingShipment -> " + success + ", message : " + exception);
-                    if (success && trackingShipment != null)
-                        Log.d(TAG, trackingShipment.toString());
+                public void onQueryCartDetails(boolean success, List<CartDetail> list, PException exception) {
+                    Log.d(TAG, "onQueryCartDetails -> " + success + ", message : " + exception);
+                    if (success) {
+                        for (CartDetail cartDetail : list) {
+                            Log.d(TAG, cartDetail.toString());
+                        }
+                    }
                 }
             };
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.NAVER, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.STYLE_NAN_DA, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.GMARKET, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.HALF_CLUB, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AUCTION, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.TMON, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.WEMAP, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AK_MALL, handler);
-            //inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.KYOBO_BOOK, handler);
-//            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.GS_SHOP, handler);
-
-            //((EditText) findViewById(R.id.id)).setText("downnike");
-            //((EditText) findViewById(R.id.password)).setText("epop0313");
-
-            //((EditText) findViewById(R.id.id)).setText("nikeo0o");
-            //((EditText) findViewById(R.id.password)).setText("dlrbgkr1204!");
-
-            //((EditText) findViewById(R.id.id)).setText("downnike");
-            //((EditText) findViewById(R.id.password)).setText("epop0313");
-
-            //((EditText) findViewById(R.id.id)).setText("nutriwmj1");
-            //((EditText) findViewById(R.id.password)).setText("wonminjung0!");
-
-//            ((EditText) findViewById(R.id.id)).setText("vkvkdlrjf");
-//            ((EditText) findViewById(R.id.password)).setText("alsk1029");
-
-            //inquiry.storeIdAndPassword("k15210", "aa*^^*27");
-
-            //inquiry.storeIdAndPassword("sanghyuk.yi@gmail.com", "ysh1122");
-            //inquiry.storeIdAndPassword("downnike", "Dlrbgkr1204");
-            //inquiry.storeIdAndPassword("tkcho05243", "didtksqkr0!");
-            //inquiry.storeIdAndPassword("downnike", "epop0313");
-            //inquiry.storeIdAndPassword("k15210", "rhoa87");
-            //inquiry.storeIdAndPassword("nikeo0o", "dlrbgkr1204!");
-            //inquiry.storeIdAndPassword("hm10827@hanmail.net", "rhgoa0327");
-            //inquiry.storeIdAndPassword("popo7251@naver.com", "conmik512");
-            //inquiry.storeIdAndPassword("lmu008", "kaon639018");
-            //inquiry.storeIdAndPassword("lmu000", "kaon2963!@");
-            //inquiry.storeIdAndPassword("downnike@naver.com", "epop031311");
-            //inquiry.storeIdAndPassword("downnike", "epop0313!");
-            //inquiry.storeIdAndPassword("kongjuamy", "epop0313");
-            //inquiry.storeIdAndPassword("downnike", "dlrbgkr6413!");1
-            //inquiry.storeIdAndPassword("nutriwmj1", "wonminjung0!");
-
-            //inquiry.storeIdAndPassword("k15210", "rhgoa0327");
-            //inquiry.tryLoginIfNotAuthenticated();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
@@ -247,22 +201,12 @@ public class OnlineActivity extends AppCompatActivity {
         mOnlineStoreList.add(OnlineConstant.NAVER);
         mOnlineStoreList.add(OnlineConstant.INTERPARK);
         mOnlineStoreList.add(OnlineConstant.LOTTE_COM);
-        mOnlineStoreList.add(OnlineConstant.SINSEGAE_MALL);
-        mOnlineStoreList.add(OnlineConstant.HYUNDAI_MALL);
+        mOnlineStoreList.add(OnlineConstant.SSG);
         mOnlineStoreList.add(OnlineConstant.G9);
         mOnlineStoreList.add(OnlineConstant.AK_MALL);
-        mOnlineStoreList.add(OnlineConstant.NS_MALL);
         mOnlineStoreList.add(OnlineConstant.GS_SHOP);
-        mOnlineStoreList.add(OnlineConstant.HNS_MALL);
         mOnlineStoreList.add(OnlineConstant.CJ_MALL);
-        mOnlineStoreList.add(OnlineConstant.HOME_PLUS);
-        mOnlineStoreList.add(OnlineConstant.KURLY);
 
-        mChildList.add(mOnlineStoreList);
-        mChildList.add(mOnlineStoreList);
-        mChildList.add(mOnlineStoreList);
-        mChildList.add(mOnlineStoreList);
-        mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
@@ -280,8 +224,6 @@ public class OnlineActivity extends AppCompatActivity {
 
         String onlineStore = mGroupList.get(0);
         inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant._11ST, handler);
-        //ExtraConfig.LOG_REPORT = false;
-        //com.epopcon.extra.common.LogWrapper.setConsoleOutput(false);
 
         if (onlineStore.equals("COUPANG")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.COUPANG, handler);
@@ -302,7 +244,7 @@ public class OnlineActivity extends AppCompatActivity {
         } else if (onlineStore.equals("AUCTION")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AUCTION, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
-            ((EditText) findViewById(R.id.password)).setText("dmsql8610");
+            ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
         } else if (onlineStore.equals("_11ST")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant._11ST, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
@@ -319,14 +261,10 @@ public class OnlineActivity extends AppCompatActivity {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.LOTTE_COM, handler);
             ((EditText) findViewById(R.id.id)).setText("limeb1222");
             ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
-        } else if (onlineStore.equals("SINSEGAE_MALL")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.SINSEGAE_MALL, handler);
-            ((EditText) findViewById(R.id.id)).setText("yongjae89");
-            ((EditText) findViewById(R.id.password)).setText("soho5468");
-        } else if (onlineStore.equals("HYUNDAI_MALL")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.HYUNDAI_MALL, handler);
-            ((EditText) findViewById(R.id.id)).setText("");
-            ((EditText) findViewById(R.id.password)).setText("");
+        } else if (onlineStore.equals("SSG")) {
+            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.SSG, handler);
+            ((EditText) findViewById(R.id.id)).setText("limeunbi8610");
+            ((EditText) findViewById(R.id.password)).setText("dmsql8610");
         } else if (onlineStore.equals("G9")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.G9, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
@@ -335,30 +273,14 @@ public class OnlineActivity extends AppCompatActivity {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AK_MALL, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
             ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
-        } else if (onlineStore.equals("NS_MALL")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.NS_MALL, handler);
-            ((EditText) findViewById(R.id.id)).setText("limeunbi@naver.com");
-            ((EditText) findViewById(R.id.password)).setText("dmsql920317");
         } else if (onlineStore.equals("GS_SHOP")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.GS_SHOP, handler);
             ((EditText) findViewById(R.id.id)).setText("yongjae89");
             ((EditText) findViewById(R.id.password)).setText("x34th6ng");
-        } else if (onlineStore.equals("HNS_MALL")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.HNS_MALL, handler);
-            ((EditText) findViewById(R.id.id)).setText("lim5056");
-            ((EditText) findViewById(R.id.password)).setText("lim5056812");
         } else if (onlineStore.equals("CJ_MALL")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.CJ_MALL, handler);
             ((EditText) findViewById(R.id.id)).setText("");
             ((EditText) findViewById(R.id.password)).setText("");
-        } else if (onlineStore.equals("HOME_PLUS")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.HOME_PLUS, handler);
-            ((EditText) findViewById(R.id.id)).setText("limeunbi");
-            ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
-        } else if (onlineStore.equals("KURLY")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.KURLY, handler);
-            ((EditText) findViewById(R.id.id)).setText("nutiwmj1");
-            ((EditText) findViewById(R.id.password)).setText("wonminjung0!");
         } else {
 
         }
@@ -471,7 +393,6 @@ public class OnlineActivity extends AppCompatActivity {
     }
 
     public void tryLogin(View v) {
-        showProgress();
         try {
             String id = ((EditText) findViewById(R.id.id)).getText().toString();
             String password = ((EditText) findViewById(R.id.password)).getText().toString();
@@ -497,38 +418,14 @@ public class OnlineActivity extends AppCompatActivity {
             orderDetails.clear();
             inquiry.queryOrderDetails(OnlineConstant.PERIOD_MAX, "", "");
 
-            /*new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    OrderDetail od = new OrderDetail();
-                    ProductDetail pd = new ProductDetail();
-
-                    od.addProductDetails(pd);
-
-                    pd.setProductUrl("https://m.pay.naver.com/inflow/outlink?url=http%3A%2F%2Fstorefarm.naver.com%2Fmain%2Fproducts%2F452186367&accountid=s_519202750490573063&tr=ppc");
-                    inquiry.fillOutProductDetails(Arrays.asList(od));
-                }
-            }).start();*/
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
     }
 
-    public void queryTrackingShipment(View v) {
+    public void queryCartDetails(View c) {
         try {
-            List<TrackingShipment> list = new ArrayList<>();
-
-            for (OrderDetail orderDetail : orderDetails) {
-                for (ProductDetail productDetail : orderDetail.getProductDetails()) {
-                    TrackingShipment trackingShipment = new TrackingShipment();
-                    trackingShipment.setItemName(productDetail.getProductName());
-                    trackingShipment.setTrackingQueryString(productDetail.getTrackingQueryString());
-
-                    list.add(trackingShipment);
-                }
-            }
-
-            inquiry.queryTrackingShipment(list);
+            inquiry.queryCartDetails();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
@@ -539,38 +436,11 @@ public class OnlineActivity extends AppCompatActivity {
         view.setText("");
     }
 
-    private void showProgress() {
-        /*runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog == null) {
-                    progressDialog = new ProgressDialog(MainActivity.this);
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressDialog.setMessage("Please wait a minute..");
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(false);
-                }
-                progressDialog.show();
-            }
-        });*/
-    }
-
-    private void hideProgress() {
-       /* runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null)
-                    progressDialog.hide();
-            }
-        });*/
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (inquiry != null) {
-            //inquiry.destory();
-            inquiry.destory();
+            inquiry.destroy();
         }
     }
 }

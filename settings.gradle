@@ -1,7 +1,4 @@
 include ':app'
 
-include ':core'
-project (':core').projectDir = new File('../core/core')
-
-include ':extra_app'
-project (':extra_app').projectDir = new File('../extra/extra_app')
+include ':extra'
+project (':extra').projectDir = new File('../extra_lib/extra')
