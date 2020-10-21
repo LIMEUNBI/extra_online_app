@@ -193,8 +193,9 @@ public class OnlineActivity extends AppCompatActivity {
         mChildList.clear();
 
         mOnlineStoreList.add(OnlineConstant.COUPANG);
-        mOnlineStoreList.add(OnlineConstant.TMON);
         mOnlineStoreList.add(OnlineConstant.WEMAP);
+        mOnlineStoreList.add(OnlineConstant.TMON);
+
         mOnlineStoreList.add(OnlineConstant.GMARKET);
         mOnlineStoreList.add(OnlineConstant.AUCTION);
         mOnlineStoreList.add(OnlineConstant._11ST);
@@ -202,10 +203,14 @@ public class OnlineActivity extends AppCompatActivity {
         mOnlineStoreList.add(OnlineConstant.INTERPARK);
         mOnlineStoreList.add(OnlineConstant.LOTTE_COM);
         mOnlineStoreList.add(OnlineConstant.SSG);
-        mOnlineStoreList.add(OnlineConstant.G9);
         mOnlineStoreList.add(OnlineConstant.AK_MALL);
+        mOnlineStoreList.add(OnlineConstant.G9);
+
         mOnlineStoreList.add(OnlineConstant.GS_SHOP);
         mOnlineStoreList.add(OnlineConstant.CJ_MALL);
+
+        mChildList.add(mOnlineStoreList);
+        mChildList.add(mOnlineStoreList);
 
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
@@ -216,8 +221,7 @@ public class OnlineActivity extends AppCompatActivity {
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
-        mChildList.add(mOnlineStoreList);
-        mChildList.add(mOnlineStoreList);
+
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
         mChildList.add(mOnlineStoreList);
@@ -229,26 +233,27 @@ public class OnlineActivity extends AppCompatActivity {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.COUPANG, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi@naver.com");
             ((EditText) findViewById(R.id.password)).setText("dmsql8610");
-        } else if (onlineStore.equals("TMON")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.TMON, handler);
-            ((EditText) findViewById(R.id.id)).setText("lim1222");
-            ((EditText) findViewById(R.id.password)).setText("dmsql8610");
         } else if (onlineStore.equals("WEMAP")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.WEMAP, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi@naver.com");
             ((EditText) findViewById(R.id.password)).setText("dmsql8610");
+        } else if (onlineStore.equals("TMON")) {
+            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.TMON, handler);
+            ((EditText) findViewById(R.id.id)).setText("lim1222");
+            ((EditText) findViewById(R.id.password)).setText("dmsql8610");
+
         } else if (onlineStore.equals("GMARKET")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.GMARKET, handler);
+            ((EditText) findViewById(R.id.id)).setText("limeunbi");
+            ((EditText) findViewById(R.id.password)).setText("dmsql8610");
+        } else if (onlineStore.equals("_11ST")) {
+            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant._11ST, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
             ((EditText) findViewById(R.id.password)).setText("dmsql8610");
         } else if (onlineStore.equals("AUCTION")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AUCTION, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
             ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
-        } else if (onlineStore.equals("_11ST")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant._11ST, handler);
-            ((EditText) findViewById(R.id.id)).setText("limeunbi");
-            ((EditText) findViewById(R.id.password)).setText("dmsql8610");
         } else if (onlineStore.equals("NAVER")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.NAVER, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
@@ -265,13 +270,14 @@ public class OnlineActivity extends AppCompatActivity {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.SSG, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi8610");
             ((EditText) findViewById(R.id.password)).setText("dmsql8610");
+        } else if (onlineStore.equals("AK_MALL")) {
+            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AK_MALL, handler);
+            ((EditText) findViewById(R.id.id)).setText("limeunbi");
+            ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
         } else if (onlineStore.equals("G9")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.G9, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
             ((EditText) findViewById(R.id.password)).setText("dmsql8610");
-        } else if (onlineStore.equals("AK_MALL")) {
-            inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.AK_MALL, handler);
-            ((EditText) findViewById(R.id.id)).setText("limeunbi");
             ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
         } else if (onlineStore.equals("GS_SHOP")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.GS_SHOP, handler);
@@ -440,7 +446,7 @@ public class OnlineActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (inquiry != null) {
-            inquiry.destroy();
+            inquiry.destory();
         }
     }
 }
