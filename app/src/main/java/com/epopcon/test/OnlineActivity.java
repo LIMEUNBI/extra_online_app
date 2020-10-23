@@ -260,8 +260,8 @@ public class OnlineActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.password)).setText("dmsql1222^^");
         } else if (onlineStore.equals("INTERPARK")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.INTERPARK, handler);
-            ((EditText) findViewById(R.id.id)).setText("lolo4077");
-            ((EditText) findViewById(R.id.password)).setText("rhdms883^^");
+            ((EditText) findViewById(R.id.id)).setText("limeunbi");
+            ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
         } else if (onlineStore.equals("LOTTE_COM")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.LOTTE_COM, handler);
             ((EditText) findViewById(R.id.id)).setText("limeb1222");
@@ -278,7 +278,6 @@ public class OnlineActivity extends AppCompatActivity {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.G9, handler);
             ((EditText) findViewById(R.id.id)).setText("limeunbi");
             ((EditText) findViewById(R.id.password)).setText("dmsql8610");
-            ((EditText) findViewById(R.id.password)).setText("dmsql0302^^");
         } else if (onlineStore.equals("GS_SHOP")) {
             inquiry = OnlineDeliveryInquiryImpl.newInstance(context, OnlineConstant.GS_SHOP, handler);
             ((EditText) findViewById(R.id.id)).setText("yongjae89");
